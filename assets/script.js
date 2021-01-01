@@ -55,8 +55,7 @@ function storeCities() {
 let searchCity = $("#search");
 
 searchCity.on("keydown", function (e) {
-  //display date with moment.js l
-  $("#currentDate").text(moment().format("L"));
+  
   //capitalize first letter
   let input = $(this).val();
   input = input.toLowerCase().replace(/\b[a-z]/g, function (c) {
@@ -116,6 +115,8 @@ function weatherApi(target) {
       location.reload();
     })
     .then(function (response) {
+        //display date with moment.js l
+        $("#currentDate").text(moment().format("L"));
       //get city name
       $("#cityTitle").text(response.name);
 
