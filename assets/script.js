@@ -137,13 +137,13 @@ function weatherApi(target) {
 
       //Icon
       let icon = response.weather[0].icon;
-      let iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+      let iconUrl = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
       console.log(iconUrl);
       $("#mainIcon").attr("src", iconUrl);
 
       //get UV
       let uvIndexUrl =
-        "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+        "https://api.openweathermap.org/data/2.5/uvi?lat=" +
         response.coord.lat +
         "&lon=" +
         response.coord.lon +
