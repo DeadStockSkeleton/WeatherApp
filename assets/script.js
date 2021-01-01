@@ -115,8 +115,10 @@ function weatherApi(target) {
       location.reload();
     })
     .then(function (response) {
+      forecast(target, response.coord.lat, response.coord.lon);
+      console.log(response.coord);
         //display date with moment.js l
-        $("#currentDate").text(moment().format("L"));
+        $("#currentDate").text("("+moment().format("L")+")");
       //get city name
       $("#cityTitle").text(response.name);
 
@@ -171,58 +173,105 @@ function weatherApi(target) {
         }
       });
 
-      forecast(target);
+
     });
     
 
   
 }
 
-function forecast(target){
-//get forecast
-let forecastUrl =
-"https://api.openweathermap.org/data/2.5/forecast?q=" +
-target +
-"&appid=" +
-apiKey;
+function forecast(target, lat, lon){
+//get forecast data
+let url = 'https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=current,minutely,hourly&appid='+apiKey;
 $.ajax({
-url: forecastUrl,
-method: "GET",
-}).then(function (res) {
-    console.log(res);
-let forecastBlock = $("#forecast");
-forecastBlock.html("");
-for (let i = 0; i < res.list.length && i < 5; i++) {
-  let card = $("<div>");
-  let cardBody = $("<div>");
-  card.attr("class", "card me-3 p-3 h-50");
-  cardBody.attr("class", "card-body");
-  let temp = res.list[i].main.temp;
-  temp = ((temp - 273.15) * 9) / 5 + 32;
-  temp = temp.toFixed(0);
-  let humid = res.list[i].main.humidity;
-  let date = res.list[i].dt_txt;
-  date = date.substr(0, 10);
-  let h5 = $("<h5>");
-  h5.text("(" + date + ")");
-  card.append(h5);
-  let forecastIcon = res.list[i].weather[0].icon;
-  let p = $("<p>");
-  let iconUrlForecast =
-    "https://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
-  let img = $("<img>");
-  card.append(img);
-  img.attr("src", iconUrlForecast);
-  p.html("<b>Temp: </b><span>" + temp + " °F</span>");
-  card.append(p);
-  let humidP = $("<p>");
-  humidP.html("<b>Humidity: </b><span>" + humid + "%</span>");
-  card.append(humidP);
-  $(".w-icon").attr("src", forecastIcon);
-  card.append(cardBody);
-  forecastBlock.append(card);
-}
-});
+  url: url,
+  method: 'GET'
+}).then(function(response) {
+  console.log(response);
+  let forecastBlock = $("#forecast");
+  forecastBlock.html("");
+  for (let i = 0; i < response.daily.length && i < 5; i++){
+    console.log(response.daily[i]);
+    let time = response.daily[i].dt;
+    let secs = time * 1000;
+    let date = new Date(secs);
+    date = date.toLocaleString();
+    date = date.substring(0,8);
+    let h5 = $('<small>');
+    h5.attr('class', "text-muted")
+    h5.text('('+date+')');
+
+    let card = $("<div>");
+    let cardBody = $("<div>");
+    card.attr("class", "card me-3 p-2");
+    cardBody.attr("class", "card-body");
+    let temp = response.daily[i].temp.max;
+    temp = ((temp - 273.15) * 9) / 5 + 32;
+    temp = temp.toFixed(0);
+    console.log(temp);
+    let humid = response.daily[i].humidity;
+    let icon = response.daily[i].weather[0].icon;
+    let iconUrlForecast = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+    let img = $("<img>");
+    img.attr("src", iconUrlForecast);
+    cardBody.append(h5);
+    cardBody.append(img);
+    card.append(cardBody);
+    forecastBlock.append(card);
+    let p = $("<p>");
+    p.html("<b>Temp: </b><span>" + temp + " °F</span>");
+    cardBody.append(p);
+    let humidP = $("<p>");
+    humidP.html("<b>Humidity: </b><span>" + humid + "%</span>");
+    cardBody.append(humidP);
+  }
+
+})
+console.log(moment().day(0));
+//get forecast
+// let forecastUrl =
+// "https://api.openweathermap.org/data/2.5/forecast?q=" +
+// target +
+// "&appid=" +
+// apiKey;
+// $.ajax({
+// url: forecastUrl,
+// method: "GET",
+// }).then(function (res) {
+//     console.log(res);
+// let forecastBlock = $("#forecast");
+// forecastBlock.html("");
+// for (let i = 0; i < res.list.length && i < 5; i++) {
+//   let card = $("<div>");
+//   let cardBody = $("<div>");
+//   card.attr("class", "card me-3 p-3 h-50");
+//   cardBody.attr("class", "card-body");
+//   let temp = res.list[i].main.temp;
+//   temp = ((temp - 273.15) * 9) / 5 + 32;
+//   temp = temp.toFixed(0);
+//   let humid = res.list[i].main.humidity;
+//   let date = res.list[i].dt_txt;
+//   date = date.substr(0, 10);
+//   let h5 = $("<h5>");
+//   h5.text("(" + date + ")");
+//   card.append(h5);
+//   let forecastIcon = res.list[i].weather[0].icon;
+//   let p = $("<p>");
+//   let iconUrlForecast =
+//     "https://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
+//   let img = $("<img>");
+//   card.append(img);
+//   img.attr("src", iconUrlForecast);
+//   p.html("<b>Temp: </b><span>" + temp + " °F</span>");
+//   card.append(p);
+//   let humidP = $("<p>");
+//   humidP.html("<b>Humidity: </b><span>" + humid + "%</span>");
+//   card.append(humidP);
+//   $(".w-icon").attr("src", forecastIcon);
+//   card.append(cardBody);
+//   forecastBlock.append(card);
+// }
+// });
 }
 
 render();
