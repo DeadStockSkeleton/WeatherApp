@@ -2,11 +2,11 @@
 ![in action gif](/assets/op.gif)
 
 ## Table of contents
-* [What is it?](#what-is-it)
+* [General Info](#general-info)
 * [How To Use](#how-to-use)
 * [Work Cited](#work-cited)
 
-# What is it?
+# General Info?
 Weather**App** is a web browser application that displays requested city's current weather and forecast! Weather**App** takes advantage of [OpenWeather](https://openweathermap.org/)'s current weather, UV index and forecast features. In addtion, Weather**App** uses [Moment.js](https://momentjs.com/) to display dates!
 
 # How to use
