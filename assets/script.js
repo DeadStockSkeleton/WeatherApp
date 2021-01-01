@@ -138,7 +138,6 @@ function weatherApi(target) {
       //Icon
       let icon = response.weather[0].icon;
       let iconUrl = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
-      console.log(iconUrl);
       $("#mainIcon").attr("src", iconUrl);
 
       //get UV
@@ -218,7 +217,6 @@ for (let i = 0; i < res.list.length && i < 5; i++) {
   humidP.html("<b>Humidity: </b><span>" + humid + "%</span>");
   card.append(humidP);
   $(".w-icon").attr("src", forecastIcon);
-  console.log(temp);
   card.append(cardBody);
   forecastBlock.append(card);
 }
