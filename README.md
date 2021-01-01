@@ -13,3 +13,4 @@ To use the Weather**App**, simply click the **SEARCH FOR A CITY** input and type
 * Jquery. "Jquery Api". Jquery, , web. https://api.jquery.com/
 * Samanthaming.com, . "How To Check If Array Includes A Value In Javascript?". Samanthaming.com, , Web. https://www.samanthaming.com/tidbits/81-how-to-check-if-array-includes-a-value/
 * Olson, Peter. "Uppercase First Letter Of Variable". Stackoverflow, 2010, web. https://stackoverflow.com/questions/5122402/uppercase-first-letter-of-variable
+* Coder Rocket Fuel. "Convert A Unix Timestamp To A Date In Vanilla Javascript". Coder Rocket Fuel, 2019, web. https://coderrocketfuel.com/article/convert-a-unix-timestamp-to-a-date-in-vanilla-javascript
