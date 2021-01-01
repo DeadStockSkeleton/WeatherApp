@@ -190,7 +190,7 @@ function forecast(target, lat, lon) {
     console.log(response);
     let forecastBlock = $("#forecast");
     forecastBlock.html("");
-    for (let i = 0; i < response.daily.length && i < 5; i++) {
+    for (let i = 1; i < response.daily.length && i < 6; i++) {
       console.log(response.daily[i]);
       let time = response.daily[i].dt;
       let secs = time * 1000;
