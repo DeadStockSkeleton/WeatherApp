@@ -1,10 +1,15 @@
 # Weather**App**
 ![in action gif](/assets/op.gif)
 
+## Table of contents
+* [What is it?](#what-is-it)
+* [How To Use](#how-to-use)
+* [Work Cited](#work-cited)
+
 # What is it?
 Weather**App** is a web browser application that displays requested city's current weather and forecast! Weather**App** takes advantage of [OpenWeather](https://openweathermap.org/)'s current weather, UV index and forecast features. In addtion, Weather**App** uses [Moment.js](https://momentjs.com/) to display dates!
 
-# How to use it?
+# How to use
 To use the Weather**App**, simply click the **SEARCH FOR A CITY** input and type which ever existing city you want then press **ENTER**. The city's current weather and forecast should display. When refreshed, your prevoius searches should still be there, you can clear your history by clicking **CLEAR HISTORY** button on the top right of the webpage.  Its that simple!! [You can find WeatherApp here!](https://deadstockskeleton.github.io/WeatherApp/)
 
 # Work Cited
