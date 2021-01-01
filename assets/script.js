@@ -142,34 +142,34 @@ function weatherApi(target) {
       $("#mainIcon").attr("src", iconUrl);
 
       //get UV
-    //   let uvIndexUrl =
-    //     "https://api.openweathermap.org/data/2.5/uvi?lat=" +
-    //     response.coord.lat +
-    //     "&lon=" +
-    //     response.coord.lon +
-    //     "&appid=" +
-    //     apiKey;
-    //   $.ajax({
-    //     url: uvIndexUrl,
-    //     method: "GET",
-    //   }).then(function (data) {
-    //     //display text
-    //     $("#index").text(data.value);
-    //     //get uv index num
-    //     let uvIndex = data.value;
-    //     uvIndex = parseInt(uvIndex);
-    //     //uvindex val is less than 3
-    //     if (uvIndex < 3) {
-    //       //change text color to green
-    //       $("#index").attr("class", "text-success");
-    //       //else change color to yellow
-    //     } else if (uvIndex > 2 && uvIndex < 8) {
-    //       $("#index").attr("class", "text-warning");
-    //       //else red text
-    //     } else {
-    //       $("#index").attr("class", "danger");
-    //     }
-    //   });
+      let uvIndexUrl =
+        "https://api.openweathermap.org/data/2.5/uvi?lat=" +
+        response.coord.lat +
+        "&lon=" +
+        response.coord.lon +
+        "&appid=" +
+        apiKey;
+      $.ajax({
+        url: uvIndexUrl,
+        method: "GET",
+      }).then(function (data) {
+        //display text
+        $("#index").text(data.value);
+        //get uv index num
+        let uvIndex = data.value;
+        uvIndex = parseInt(uvIndex);
+        //uvindex val is less than 3
+        if (uvIndex < 3) {
+          //change text color to green
+          $("#index").attr("class", "text-success");
+          //else change color to yellow
+        } else if (uvIndex > 2 && uvIndex < 8) {
+          $("#index").attr("class", "text-warning");
+          //else red text
+        } else {
+          $("#index").attr("class", "danger");
+        }
+      });
 
       forecast(target);
     });
