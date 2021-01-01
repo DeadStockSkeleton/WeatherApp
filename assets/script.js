@@ -142,81 +142,87 @@ function weatherApi(target) {
       $("#mainIcon").attr("src", iconUrl);
 
       //get UV
-      let uvIndexUrl =
-        "https://api.openweathermap.org/data/2.5/uvi?lat=" +
-        response.coord.lat +
-        "&lon=" +
-        response.coord.lon +
-        "&appid=" +
-        apiKey;
-      $.ajax({
-        url: uvIndexUrl,
-        method: "GET",
-      }).then(function (data) {
-        //display text
-        $("#index").text(data.value);
-        //get uv index num
-        let uvIndex = data.value;
-        uvIndex = parseInt(uvIndex);
-        //uvindex val is less than 3
-        if (uvIndex < 3) {
-          //change text color to green
-          $("#index").attr("class", "text-success");
-          //else change color to yellow
-        } else if (uvIndex > 2 && uvIndex < 8) {
-          $("#index").attr("class", "text-warning");
-          //else red text
-        } else {
-          $("#index").attr("class", "danger");
-        }
-      });
+    //   let uvIndexUrl =
+    //     "https://api.openweathermap.org/data/2.5/uvi?lat=" +
+    //     response.coord.lat +
+    //     "&lon=" +
+    //     response.coord.lon +
+    //     "&appid=" +
+    //     apiKey;
+    //   $.ajax({
+    //     url: uvIndexUrl,
+    //     method: "GET",
+    //   }).then(function (data) {
+    //     //display text
+    //     $("#index").text(data.value);
+    //     //get uv index num
+    //     let uvIndex = data.value;
+    //     uvIndex = parseInt(uvIndex);
+    //     //uvindex val is less than 3
+    //     if (uvIndex < 3) {
+    //       //change text color to green
+    //       $("#index").attr("class", "text-success");
+    //       //else change color to yellow
+    //     } else if (uvIndex > 2 && uvIndex < 8) {
+    //       $("#index").attr("class", "text-warning");
+    //       //else red text
+    //     } else {
+    //       $("#index").attr("class", "danger");
+    //     }
+    //   });
+
+      forecast(target);
     });
     
 
-  //get forecast
-  let forecastUrl =
-    "https://api.openweathermap.org/data/2.5/forecast?q=" +
-    target +
-    "&appid=" +
-    apiKey;
-  $.ajax({
-    url: forecastUrl,
-    method: "GET",
-  }).then(function (res) {
-    let forecastBlock = $("#forecast");
-    forecastBlock.html("");
-    for (let i = 0; i < res.list.length && i < 5; i++) {
-      let card = $("<div>");
-      let cardBody = $("<div>");
-      card.attr("class", "card me-3 p-3 h-50");
-      cardBody.attr("class", "card-body");
-      let temp = res.list[i].main.temp;
-      temp = ((temp - 273.15) * 9) / 5 + 32;
-      temp = temp.toFixed(0);
-      let humid = res.list[i].main.humidity;
-      let date = res.list[i].dt_txt;
-      date = date.substr(0, 10);
-      let h5 = $("<h5>");
-      h5.text("(" + date + ")");
-      card.append(h5);
-      let forecastIcon = res.list[i].weather[0].icon;
-      let p = $("<p>");
-      let iconUrlForecast =
-        "https://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
-      let img = $("<img>");
-      card.append(img);
-      img.attr("src", iconUrlForecast);
-      p.html("<b>Temp: </b><span>" + temp + " °F</span>");
-      card.append(p);
-      let humidP = $("<p>");
-      humidP.html("<b>Humidity: </b><span>" + humid + "%</span>");
-      card.append(humidP);
-      $(".w-icon").attr("src", forecastIcon);
-      console.log(temp);
-      card.append(cardBody);
-      forecastBlock.append(card);
-    }
-  });
+  
+}
+
+function forecast(target){
+//get forecast
+let forecastUrl =
+"https://api.openweathermap.org/data/2.5/forecast?q=" +
+target +
+"&appid=" +
+apiKey;
+$.ajax({
+url: forecastUrl,
+method: "GET",
+}).then(function (res) {
+let forecastBlock = $("#forecast");
+forecastBlock.html("");
+for (let i = 0; i < res.list.length && i < 5; i++) {
+  let card = $("<div>");
+  let cardBody = $("<div>");
+  card.attr("class", "card me-3 p-3 h-50");
+  cardBody.attr("class", "card-body");
+  let temp = res.list[i].main.temp;
+  temp = ((temp - 273.15) * 9) / 5 + 32;
+  temp = temp.toFixed(0);
+  let humid = res.list[i].main.humidity;
+  let date = res.list[i].dt_txt;
+  date = date.substr(0, 10);
+  let h5 = $("<h5>");
+  h5.text("(" + date + ")");
+  card.append(h5);
+  let forecastIcon = res.list[i].weather[0].icon;
+  let p = $("<p>");
+  let iconUrlForecast =
+    "https://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
+  let img = $("<img>");
+  card.append(img);
+  img.attr("src", iconUrlForecast);
+  p.html("<b>Temp: </b><span>" + temp + " °F</span>");
+  card.append(p);
+  let humidP = $("<p>");
+  humidP.html("<b>Humidity: </b><span>" + humid + "%</span>");
+  card.append(humidP);
+  $(".w-icon").attr("src", forecastIcon);
+  console.log(temp);
+  card.append(cardBody);
+  forecastBlock.append(card);
+}
+});
 }
 
 render();
