@@ -171,10 +171,11 @@ function weatherApi(target) {
         }
       });
     });
+    
 
   //get forecast
   let forecastUrl =
-    "http://api.openweathermap.org/data/2.5/forecast?q=" +
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
     target +
     "&appid=" +
     apiKey;
@@ -201,7 +202,7 @@ function weatherApi(target) {
       let forecastIcon = res.list[i].weather[0].icon;
       let p = $("<p>");
       let iconUrlForecast =
-        "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
+        "https://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
       let img = $("<img>");
       card.append(img);
       img.attr("src", iconUrlForecast);
