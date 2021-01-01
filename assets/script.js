@@ -115,7 +115,6 @@ function weatherApi(target) {
     })
     .then(function (response) {
       forecast(target, response.coord.lat, response.coord.lon);
-      console.log(response.coord);
       //display date with moment.js l
       $("#currentDate").text("(" + moment().format("L") + ")");
       //get city name
@@ -187,11 +186,9 @@ function forecast(target, lat, lon) {
     url: url,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
     let forecastBlock = $("#forecast");
     forecastBlock.html("");
     for (let i = 1; i < response.daily.length && i < 6; i++) {
-      console.log(response.daily[i]);
       let time = response.daily[i].dt;
       let secs = time * 1000;
       let date = new Date(secs);
@@ -208,7 +205,6 @@ function forecast(target, lat, lon) {
       let temp = response.daily[i].temp.max;
       temp = ((temp - 273.15) * 9) / 5 + 32;
       temp = temp.toFixed(0);
-      console.log(temp);
       let humid = response.daily[i].humidity;
       let icon = response.daily[i].weather[0].icon;
       let iconUrlForecast =
