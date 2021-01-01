@@ -189,6 +189,7 @@ $.ajax({
 url: forecastUrl,
 method: "GET",
 }).then(function (res) {
+    console.log(res);
 let forecastBlock = $("#forecast");
 forecastBlock.html("");
 for (let i = 0; i < res.list.length && i < 5; i++) {
