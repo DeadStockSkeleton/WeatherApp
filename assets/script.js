@@ -193,7 +193,7 @@ function forecast(target, lat, lon) {
       let secs = time * 1000;
       let date = new Date(secs);
       date = date.toLocaleString();
-      date = date.substring(0, 8);
+      date = date.substring(0, 9);
       let h5 = $("<small>");
       h5.attr("class", "text-muted");
       h5.text("(" + date + ")");
