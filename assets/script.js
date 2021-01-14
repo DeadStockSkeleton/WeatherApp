@@ -180,7 +180,7 @@ function forecast(target, lat, lon) {
     lat +
     "&lon=" +
     lon +
-    "&exclude=current,minutely,hourly&appid=" +
+    "&exclude=current,minutely,hourly&units=imperial&appid=" +
     apiKey;
   $.ajax({
     url: url,
