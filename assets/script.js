@@ -4,6 +4,7 @@ if (cities === null) {
   cities = [];
 }
 
+
 const apiKey = "92554cbde6d54e5152a98d286b1f0de4";
 
 //clear history
@@ -100,7 +101,7 @@ function weatherApi(target) {
   let current =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     target +
-    "&appid=" +
+    "&units=imperial&appid=" +
     apiKey;
 
   $.ajax({
@@ -125,7 +126,6 @@ function weatherApi(target) {
       //convert to int
       tempContent = parseFloat(tempContent);
       //convert from kelvin to fahrenheit
-      tempContent = ((tempContent - 273.15) * 9) / 5 + 32;
       tempContent = tempContent.toFixed(0);
       //display temp in DOM
       $("#temp").text(tempContent + " °F");
@@ -147,7 +147,7 @@ function weatherApi(target) {
         response.coord.lat +
         "&lon=" +
         response.coord.lon +
-        "&appid=" +
+        "&units=imperial&appid=" +
         apiKey;
       $.ajax({
         url: uvIndexUrl,
@@ -203,7 +203,6 @@ function forecast(target, lat, lon) {
       card.attr("class", "card me-3 p-2");
       cardBody.attr("class", "card-body");
       let temp = response.daily[i].temp.max;
-      temp = ((temp - 273.15) * 9) / 5 + 32;
       temp = temp.toFixed(0);
       let humid = response.daily[i].humidity;
       let icon = response.daily[i].weather[0].icon;
